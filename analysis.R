@@ -68,3 +68,20 @@ fdat["KDiam"] <- c(340, 380, 376, 330, 289, 265, 260)
 fdat["Dipole"] <- c(0, 0, 0.112, 0, 0, 1.855, 0)
 # polarizabilities (Angstrom^3)
 fdat["Polar."] <- c(1.664, 2.448, 1.953, 2.507, 0.787, 1.501, 0.208)
+
+# perform least squares fit
+
+# check rms of each feature; consider altering to make rms similar size
+
+# regularize rmses
+fdat[,"KDiam"]<- fdat[,"KDiam"]*(1/1000)
+fdat["MM"] <- fdat["MM"]^(-1/2)
+
+rms <- function(x) sqrt(sum(x*x)/length(x))
+# print out rms of features
+for(i in 1:4) { 
+  res <- rms(fdat[,i])
+  print(paste0(colnames(fdat)[i]," = ", res))
+}
+
+ls1 <- lsfit(fdat, t(dat), wt = NULL, intercept = TRUE, tolerance = 1e-07)
