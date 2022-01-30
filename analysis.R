@@ -3,23 +3,24 @@
 dat <- read.table("diffusion.dat")
 dat <- t(dat)
 cnames <-
-  dat[1, ] # save molecular formula to be used as column names
+  dat[1,] # save molecular formula to be used as column names
 dat <- matrix(as.double(dat), ncol = 8)
 
 # clean data
-dat <- dat[, -8]  # remove SF6
+dat <- dat[,-8]  # remove SF6
 cnames <- cnames[-8] # remove SF6 from cnames
-dat <- dat[-1, ]   # remove first row
-dat <- dat[-1, ]  # remove 0 degree data since some missing
+dat <- dat[-1,]   # remove first row
+dat <- dat[-1,]  # remove 0 degree data since some missing
 
 # label dataframe
-temp <- c(20, 100, 200, 300, 400) # create vector to hold temp values
+temp <-
+  c(20, 100, 200, 300, 400) # create vector to hold temp values
 colnames(dat) <- cnames
 rownames(dat) <- temp
 # swap co2 and h2o columns
 dat <- dat[, c("Ar", "CH4", "CO", "H2O", "H2", "CO2", "He")]
 # swap cnames co2 and h2o
-cnames = cnames[c(1,2,3,6,5,4,7)]
+cnames = cnames[c(1, 2, 3, 6, 5, 4, 7)]
 
 # add guessed features to dataframe
 # molecular mass, kinetic diameter, dipole moment
@@ -40,33 +41,41 @@ fdat["Dipole"] <- c(0, 0, 0.112, 1.855, 0, 0, 0)
 
 # check rms of each feature; consider altering to make rms similar size
 # regularize rmses
-fdat[,"KDiam"]<- fdat[,"KDiam"]*(1/1000)
-fdat["MM"] <- 1/sqrt(fdat["MM"])
+fdat[, "KDiam"] <- fdat[, "KDiam"] * (1 / 1000)
+fdat["MM"] <- 1 / sqrt(fdat["MM"])
 
-rms <- function(x) sqrt(sum(x*x)/length(x))
+rms <- function(x)
+  sqrt(sum(x * x) / length(x))
 # print out rms of features
-for(i in 1:3) { 
-  res <- rms(fdat[,i])
-  print(paste0(colnames(fdat)[i]," = ", res))
+for (i in 1:3) {
+  res <- rms(fdat[, i])
+  print(paste0(colnames(fdat)[i], " = ", res))
 }
 
-ls1 <- lsfit(fdat[1:5,], t(dat[,1:5]), wt = NULL, intercept = TRUE, tolerance = 1e-07)
+ls1 <-
+  lsfit(
+    fdat[1:5, ],
+    t(dat[, 1:5]),
+    wt = NULL,
+    intercept = TRUE,
+    tolerance = 1e-07
+  )
 
 # check model result on co2 and He
-fco2 <- as.numeric(cbind(1,fdat["CO2",]))
-fhe <- as.numeric(cbind(1,fdat["He",]))
+fco2 <- as.numeric(cbind(1, fdat["CO2", ]))
+fhe <- as.numeric(cbind(1, fdat["He", ]))
 
 model1 <- t(ls1$coefficients)
 rownames(model1) <- temp
 
 pred_co2 <- model1 %*% fco2
 pred_he <- model1 %*% fhe
-actual_co2 <- dat[,"CO2"]
-actual_he <- dat[,"He"]
+actual_co2 <- dat[, "CO2"]
+actual_he <- dat[, "He"]
 
 library("pracma")
-errCo2 <- rmserr(pred_co2,actual_co2)
-errH2 <- rmserr(pred_he,actual_he)
+errCo2 <- rmserr(pred_co2, actual_co2)
+errH2 <- rmserr(pred_he, actual_he)
 
 # Plot actual versus predicted
 
@@ -82,17 +91,23 @@ plot(
   xlim = c(20, 400),
   col = "blue"
 )
-points(temp,pred_co2,type="b",col="dodgerblue", lty="dashed")
+points(temp,
+       pred_co2,
+       type = "b",
+       col = "dodgerblue",
+       lty = "dashed")
 points(temp, dat[, "He"], type = "b", col = "red")
-points(temp,pred_he,type="b", col="firebrick", lty = "dashed")
+points(temp,
+       pred_he,
+       type = "b",
+       col = "firebrick",
+       lty = "dashed")
 
 legend(
   20,
   2.5,
-  legend = c("actual CO2", "pred CO2", "actual He", "pred He"),
+  legend = c("CO2 actual", "CO2 predicted", "He actual", "He predicted"),
   col = c("blue", "dodgerblue", "red", "firebrick"),
   lty = 1:2,
   cex = 0.8
 )
-dev.copy(jpeg, 'diffusivity_as_fxn_of_temp.jpg')
-dev.off()
