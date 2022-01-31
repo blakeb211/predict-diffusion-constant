@@ -1,5 +1,5 @@
 # predict_diffusion_constant
-predict diffusion constant at different temperatures for dilute gas molecules in an excess of air
+predict diffusion constant at different temperatures for different types of gas in air
 
 # Prediction methods
 - Linear least squares model
