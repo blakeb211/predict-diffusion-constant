@@ -77,36 +77,9 @@ library("pracma")
 
 # plot diffusion constant versus temp for the two species we'll predict, CO2 and He
 
-# plot(
-#   temp,
-#   dat[, "CO2"],
-#   type = "b",
-#   ylab = "diffusivity (cm^2/s)",
-#   xlab = "temp (deg C)",
-#   ylim = c(0, 3),
-#   xlim = c(20, 400),
-#   col = "blue"
-# )
-# points(temp,
-#        pred_co2,
-#        type = "b",
-#        col = "dodgerblue",
-#        lty = "dashed")
-# points(temp, dat[, "He"], type = "b", col = "red")
-# points(temp,
-#        pred_he,
-#        type = "b",
-#        col = "firebrick",
-#        lty = "dashed")
-# 
-# legend(
-#   20,
-#   2.5,
-#   legend = c("CO2 actual", "CO2 predicted", "He actual", "He predicted"),
-#   col = c("blue", "dodgerblue", "red", "firebrick"),
-#   lty = 1:2,
-#   cex = 0.8
-# )
+plot_data <- data.frame(cbind(temp,actual_co2,pred_co2,actual_he,pred_he))
+colnames(plot_data) <- c("Temp", "CO2 actual", "CO2 predicted", "He actual", "He predicted")
+
 library("ggplot2")
 colors <- c("CO2 actual" = "darkblue", "CO2 predicted" = "steelblue", 
             "He actual" = "darkred", 
@@ -114,12 +87,12 @@ colors <- c("CO2 actual" = "darkblue", "CO2 predicted" = "steelblue",
 ggplot(data=plot_data) + aes(x=Temp) + 
   geom_point(aes(y=`CO2 actual`,color ="CO2 actual")) + 
   geom_line(aes(y=`CO2 actual`,color="CO2 actual")) +
-  geom_point(aes(y=`CO2 model`,color ="CO2 predicted")) + 
-  geom_line(aes(y=`CO2 model`,color="CO2 predicted"),linetype="twodash") +
+  geom_point(aes(y=`CO2 predicted`,color ="CO2 predicted")) + 
+  geom_line(aes(y=`CO2 predicted`,color="CO2 predicted"),linetype="twodash") +
   geom_point(aes(y=`He actual`,color ="He actual")) + 
   geom_line(aes(y=`He actual`,color="He actual")) +
-  geom_point(aes(y=`He model`,color ="He predicted")) + 
-  geom_line(aes(y=`He model`,color="He predicted"),linetype="twodash") + 
+  geom_point(aes(y=`He predicted`,color ="He predicted")) + 
+  geom_line(aes(y=`He predicted`,color="He predicted"),linetype="twodash") + 
   labs(x="Temp (C)", y=bquote('Diffusivity'~(cm^2 / s)), color="Legend") +
   scale_color_manual(values=colors) +
   theme(legend.position = c(0.2, 0.75)) +
