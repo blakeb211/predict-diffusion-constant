@@ -122,8 +122,11 @@ ggplot(data=plot_data) + aes(x=Temp) +
   geom_line(aes(y=`He model`,color="He predicted"),linetype="twodash") + 
   labs(x="Temp (C)", y=bquote('Diffusivity'~(cm^2 / s)), color="Legend") +
   scale_color_manual(values=colors) +
-  theme(legend.position = c(0.2, 0.8)) +
+  theme(legend.position = c(0.2, 0.75)) +
   ggtitle("Predicting Diffusion Constants with a Linear Model") + 
-  theme(plot.title = element_text(hjust = 0.5))
-
-  ggsave(filename="model_predictions.jpg",device="jpeg")
+  theme(plot.title = element_text(hjust = 0.5,size=10)) +
+  theme(axis.title = element_text(size=10)) +
+  theme(legend.text = element_text(size=8)) +
+  theme(legend.title = element_text(size=9))
+  
+  ggsave(filename="model_predictions.jpg", height=4.3, width=4,units="in", dpi=200)
