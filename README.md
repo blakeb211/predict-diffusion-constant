@@ -4,4 +4,4 @@ predict diffusion constant at different temperatures for dilute gas molecules in
 # Prediction methods
 - linear least squares
   - feature vectors: molar mass, kinetic diameter, dipole moment
-  - ![alt text](model_predictions.jpg | width=100)
+  - ![alt text](model_predictions.jpg)
