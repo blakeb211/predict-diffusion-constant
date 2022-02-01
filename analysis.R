@@ -28,6 +28,7 @@ cnames = cnames[c(1, 2, 3, 6, 5, 4, 7)]
 # regression model yhat = t(x) %*% beta + nu
 # x is feature vector
 
+# fdat is the feature vector for the 7 molecules
 fdat <- matrix(ncol = 3, nrow = 7)
 fdat <- data.frame(fdat, row.names = cnames)
 colnames(fdat) <- c("MM", "KDiam", "Dipole")
@@ -47,10 +48,10 @@ fdat["MM"] <- 1 / sqrt(fdat["MM"])
 rms <- function(x)
   sqrt(sum(x * x) / length(x))
 # print out rms of features
-for (i in 1:3) {
-  res <- rms(fdat[, i])
-  print(paste0(colnames(fdat)[i], " = ", res))
-}
+# for (i in 1:3) {
+#   res <- rms(fdat[, i])
+#   print(paste0(colnames(fdat)[i], " = ", res))
+# }
 
 ls1 <-
   lsfit(
@@ -103,3 +104,19 @@ ggplot(data=plot_data) + aes(x=Temp) +
   theme(legend.title = element_text(size=9))
   
   ggsave(filename="model_predictions.jpg", height=4.3, width=4,units="in", dpi=200)
+  
+  print("Experimental Diffusion Constants at Different Temps:")
+  print(dat)
+  
+  print("Feature Matrix:")
+  print(fdat)
+
+  print("Linear Model:")
+  print(model1)
+  
+  print("The (+/-) signs of the model coefficients show that diffusion constants
+        are positively correlated with 1/sqrt(Molar Mass) and negatively
+        correlated with Kinetic Diameter and Dipole Moment. This makes sense
+        physically because larger molecules should bump into other molecules more and
+        molecules with a dipole moment should interact more strongly with
+        molecules around them which would slow them down.")
