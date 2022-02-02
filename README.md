@@ -8,5 +8,5 @@ predict diffusion constant at different temperatures for different types of gas 
   - <img src="model_predictions.jpg" width="400" height="430">
 
 # Summary
-- This model has the strength of being easy to interpet. Increasing the molar mass decreases the diffusion constant. Increasing the kinetic diameter and the dipole moment decrease the diffusion constant.
+- This model has the strength of being easy to interpet. Increasing the molar mass decreases the diffusion constant. Increasing the kinetic diameter or the dipole moment decreases the diffusion constant.
 - One interesting result is that the model predicts the diffusion limit for a gas at each temperature in the study, obtained by plugging the (MM = 1, KDiam = 0, Dipole = 0) feature vector into the model.
