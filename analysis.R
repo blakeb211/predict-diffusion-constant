@@ -105,18 +105,27 @@ ggplot(data=plot_data) + aes(x=Temp) +
   
   ggsave(filename="model_predictions.jpg", height=4.3, width=4,units="in", dpi=200)
   
-  print("Experimental Diffusion Constants at Different Temps:")
+  cat("\nExperimental Diffusion Constants at Different Temps:\n")
   print(dat)
   
-  print("Feature Matrix:")
+  cat("\nFeature Matrix:\n")
   print(fdat)
 
-  print("Linear Model:")
+  cat("\nLinear Model:\n")
   print(model1)
   
-  print("The (+/-) signs of the model coefficients show that diffusion constants
-        are positively correlated with 1/sqrt(Molar Mass) and negatively
-        correlated with Kinetic Diameter and Dipole Moment. This makes sense
-        physically because larger molecules should bump into other molecules more and
-        molecules with a dipole moment should interact more strongly with
-        molecules around them which would slow them down.")
+  cat("\nThe (+/-) signs of the model coefficients show that diffusion constants\n
+        are positively correlated with 1/sqrt(Molar Mass) and negatively\n
+        correlated with Kinetic Diameter and Dipole Moment. This makes sense\n
+        physically because larger molecules should bump into other molecules\n
+        more and molecules with a dipole moment should interact more strongly with\n
+        molecules around them which would slow them down.\n")
+  
+  # calculate diffusion limit of gases in air at these temperatures
+  # diffusion limit is obtained from plugging Molar Mass = 1, Kinetic Diameter = 0, 
+  # and Dipole Moment = 1 into the model.
+  
+  predDiffusionLimit = model1 %*% c(1, 1/sqrt(1), 0, 0)
+  cat("\nThe predicted diffusion limit for a gas at each temperature:\n")
+  colnames(predDiffusionLimit) <- "cm^2 / 2"
+  print(predDiffusionLimit)
