@@ -103,8 +103,6 @@ ggplot(data=plot_data) + aes(x=Temp) +
   theme(legend.text = element_text(size=8)) +
   theme(legend.title = element_text(size=9))
   
-  ggsave(filename="model_predictions.jpg", height=4.3, width=4,units="in", dpi=200)
-  
   cat("\nExperimental Diffusion Constants at Different Temps:\n")
   print(dat)
   
@@ -126,6 +124,11 @@ ggplot(data=plot_data) + aes(x=Temp) +
   # and Dipole Moment = 1 into the model.
   
   predDiffusionLimit = model1 %*% c(1, 1/sqrt(1), 0, 0)
+  
   cat("\nThe predicted diffusion limit for a gas at each temperature:\n")
   colnames(predDiffusionLimit) <- "cm^2 / 2"
   print(predDiffusionLimit)
+  
+  
+  
+  ggsave(filename="model_predictions.jpg", height=4.3, width=4,units="in", dpi=200)
