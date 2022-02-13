@@ -3,12 +3,12 @@ Predict diffusion constants at different temperatures for various types gases in
 
 # Prediction methods
 - Linear least squares model
-- See "analysis.R" for details. 
+- See "analysis.R" for details
 - Feature vector data was assembled for 7 small molecules with known diffusion constants at 5 different temperatures
-- The model (coefficient) matrix was solved using 5 of the molecules and tested against the 2 remaining molecules (CO2 and He).
+- The model (coefficient) matrix was solved using 5 of the molecules and tested against the 2 remaining molecules (CO2 and He)
 
 # Feature Selection
-- The feature selection was done manually 
+- Done manually
 - Features: 1 / (molar mass)^0.5, 1/(molecular volume)^1/3, dipole moment
 
 # Summary
