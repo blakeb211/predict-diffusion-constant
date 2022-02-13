@@ -7,7 +7,7 @@ Predict diffusion constants at different temperatures for various types gases in
 - Feature vectors were assembled for 7 small molecules with known diffusion constants at 5 different temperatures
 - The model (coefficient) matrix was solved using 5 of the molecules and tested against the 2 remaining molecules.
 
-# Feature Selection (Feature engineering)
+# Feature Selection
 - The feature selection was done manually. 
 - Features: 1 / (molar mass)^0.5, kinetic diameter, dipole moment
 
