@@ -16,7 +16,7 @@ Predict diffusion constants at different temperatures for various types gases in
 
 ## Benefits of the method
 - This model is easy to interpet by inspecting the size and sign of the feature coefficients. 
-  - E.g. The (1/sqrt(MM)) feature increases when the MM gets smaller, and the diffusion constant increases, and all the (1/sqrt(MM)) coefficients are positive. I.e. The diffusion constant "goes as" the 1/sqrt(MM) term and thus has a positive sign in the model
+  - E.g. All the (1/sqrt(MM)) coefficients are positive which means that when the 1/sqrt(MM) feature increases, the diffusion constant increases. I.e. The diffusion constant "goes as" the 1/sqrt(MM) term. Since increasing the MM decreases the term, we can infer that more massive molecules diffuse more slowly than lighter molecules (and vice versa).
   - The same logic holds for the Volume term, 1/ ( Vol^(1/3) ). The diffusion constant varies in the same direction as this term, so its model coefficients are postiive.
   - All the dipole moment coefficients are negative, indicating that when all other factors are equal, a higher dipole moment with result in a lower diffusion constant. This makes sense from a molecular interaction standpoint, since molecules with stronger interaction forces with their neighbors will move more slowly through a medium. 
   - The model yields an approximation for the diffusion limit at each temperature by applying it to the (MM = 1, Volume = 0, Dipole = 0) feature vector at each temperature. 
