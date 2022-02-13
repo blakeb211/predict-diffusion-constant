@@ -23,5 +23,5 @@ Predict diffusion constants at different temperatures for various types gases in
 
 ## Drawbacks of the method
 - Feature selection done manually, which is arbitrary and does not scale well.
-- Domain knowledge used to improve the fit, which also does not scale well. e.g. to transform the MM term to 1/sqrt(MM), requiring expertise from the analyst.
+- Domain knowledge used to improve the fit, which also does not scale well. e.g. Choice to tranform the MM term to 1/sqrt(MM).
 - Non-linear relationships unknown to the analyst are not accounted for.
