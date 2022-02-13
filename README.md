@@ -1,5 +1,5 @@
 # Overview
-Predict diffusion constants at different temperatures for various types gases in air
+Diffusion constants are predicted at several temperatures for two different types of gases using a linear least squares method.
 
 # Prediction methods
 - Linear least squares model
