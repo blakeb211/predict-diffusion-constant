@@ -1,5 +1,5 @@
-# predict_diffusion_constant
-predict diffusion constant at different temperatures for different types of gas in air
+# Synopsis
+Predict diffusion constants at different temperatures for various types of gases in air
 
 # Prediction methods
 - Linear least squares model
